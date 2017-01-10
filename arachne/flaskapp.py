@@ -99,4 +99,4 @@ class Arachne(Flask):
 
     def _init_crawler_process(self):
         from scrapy.crawler import CrawlerProcess
-        self.config['CRAWLER_PROCESS'] = CrawlerProcess()
+        self.config['CRAWLER_PROCESS'] = CrawlerProcess(settings=self.config['GLOBAL_SETTINGS'])

@@ -19,3 +19,5 @@ DEBUG = True
 
 # common settings for each spider
 SCRAPY_SETTINGS = {}
+
+GLOBAL_SETTINGS = {}
