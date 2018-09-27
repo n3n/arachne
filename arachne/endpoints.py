@@ -3,7 +3,7 @@ from arachne.scrapy_utils import start_crawler
 
 
 def get_package(location):
-    package = location.split('.')[1:-1]
+    package = filter(lambda p: p != 'spiders', location.split('.')[1:-1])
     if len(package):
         return package[0]
     return None
@@ -19,7 +19,10 @@ def list_spiders_endpoint():
     for item in app.config['SPIDER_SETTINGS']:
         package = get_package(item['location'])
         url = request.url_root + 'run-spider/' + item['endpoint']
-        if package and package in spiders:
+        if package and package not in spiders:
+            spiders[package] = {}
+
+        if package:
             spiders[package][item['endpoint']] = url
         else:
             spiders[item['endpoint']] = url
