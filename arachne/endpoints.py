@@ -2,6 +2,13 @@ from flask import current_app as app, jsonify, abort, request
 from arachne.scrapy_utils import start_crawler
 
 
+def get_package(location):
+    package = location.split('.')[1:-1]
+    if len(package):
+        return package[0]
+    return None
+
+
 def list_spiders_endpoint():
     """It returns a list of spiders available in the SPIDER_SETTINGS dict
 
@@ -10,7 +17,12 @@ def list_spiders_endpoint():
     """
     spiders = {}
     for item in app.config['SPIDER_SETTINGS']:
-        spiders[item['endpoint']] = request.url_root + 'run-spider/' + item['endpoint']
+        package = get_package(item['location'])
+        url = request.url_root + 'run-spider/' + item['endpoint']
+        if package and package in spiders:
+            spiders[package][item['endpoint']] = url
+        else:
+            spiders[item['endpoint']] = url
     return jsonify(endpoints=spiders)
 
 

@@ -16,14 +16,14 @@ class BaseFlaskApp(TestCase):
         settings = {
             'SPIDER_SETTINGS': [{
                 'endpoint': 'abc',
-                'location': 'spiders.abc.ABC',
+                'location': 'spiders.sg.ABC',
                 'spider': 'ABC',
                 'scrapy_settings': {
                     'TELNETCONSOLE_PORT': 2020
                 }
             }, {
                 'endpoint': 'pqr',
-                'location': 'spiders.pqr.PQR',
+                'location': 'spiders.th.PQR',
                 'spider': 'PQR',
             }],
             'SECRET_KEY' : 'secret_test_key',

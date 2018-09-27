@@ -33,7 +33,7 @@ class Arachne(Flask):
                        self.config['EXPORT_PATH'],
                        'json/')
         self.check_dir(self.config['LOGS'], self.config['LOGS_PATH'], '')
-        
+
         # from scrapy's version_info initialize Flask app
         # for version before 1.0.0 you don't need to init crawler_process
         if SCRAPY_VERSION >= (1, 0, 0):

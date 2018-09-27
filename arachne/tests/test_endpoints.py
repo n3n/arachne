@@ -12,8 +12,12 @@ class TestFlaskEndpoints(BaseFlaskApp):
         resp = self.client.get('/')
         expected_resp = {
             'endpoints': {
-                'abc': 'http://localhost/run-spider/abc',
-                'pqr': 'http://localhost/run-spider/pqr'
+                'sg': {
+                    'abc': 'http://localhost/run-spider/abc'
+                },
+                'th': {
+                    'pqr': 'http://localhost/run-spider/pqr'
+                }
             }
         }
         self.assertTrue(resp.data, expected_resp)
@@ -23,13 +27,13 @@ class TestFlaskEndpoints(BaseFlaskApp):
         resp = self.client.get('/run-spider/abc')
         self.assertTrue(mock_start_crawler.called)
         client_config = self.client.application.config
-        mock_start_crawler.assert_called_once_with('spiders.abc.ABC.ABC', 
-                                                   client_config, 
+        mock_start_crawler.assert_called_once_with('spiders.sg.ABC.ABC',
+                                                   client_config,
                                                    {'TELNETCONSOLE_PORT': 2020})
 
-        self.assertEquals(json.loads(resp.data), 
-                          {'home': 'http://localhost/', 
-                           'status': 'running', 
+        self.assertEquals(json.loads(resp.data),
+                          {'home': 'http://localhost/',
+                           'status': 'running',
                            'spider_name': 'abc'})
 
         resp = self.client.get('/run-spider/xyz')

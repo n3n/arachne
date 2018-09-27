@@ -26,7 +26,7 @@ This is sample settings file for spiders in your project. The settings file shou
 		{
 			'endpoint': 'dmoz',
 			'location': 'spiders.DmozSpider',
-			'spider': 'DmozSpider'    
+			'spider': 'DmozSpider'
 		}
 	]
 
