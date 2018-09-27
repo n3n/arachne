@@ -12,9 +12,9 @@ Arachne provides a wrapper around your scrapy ``Spider`` object to run them thro
 
 Installation
 ============
-You can install **Arachne** from pip 
+You can install **ArachneScrapy** from pip 
 
-	pip install Arachne
+	pip install ArachneScrapy
 
 
 Sample settings
