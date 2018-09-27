@@ -9,7 +9,7 @@ install_requires = [
 
 setup(
     name='ArachneScrapy',
-    version='0.6.0',
+    version='0.6.1',
     author='Nonpawit Teerachetmongkol',
     author_email='nonpawit.tee@gmail.com',
     packages=find_packages(),
