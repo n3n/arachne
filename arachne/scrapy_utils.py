@@ -70,6 +70,13 @@ def get_spider_settings(flask_app_config, spider_scrapy_settings):
     settings = Settings(all_settings)
     return settings
 
+def merge_two_dicts(x, y):
+    '''
+    https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression?answertab=votes#tab-top
+    '''
+    z = x.copy()   # start with x's keys and values
+    z.update(y)    # modifies z with y's keys and values & returns None
+    return z
 
 def start_crawler(spider_loc, flask_app_config, spider_scrapy_settings):
     spider = load_object(spider_loc)
@@ -81,6 +88,8 @@ def start_crawler(spider_loc, flask_app_config, spider_scrapy_settings):
         crawler.start()
 
     else:
-        spider.custom_settings = settings
-        flask_app_config['CRAWLER_PROCESS'].crawl(spider)
+        if not spider.custom_settings:
+            spider.custom_settings = {}
 
+        spider.custom_settings = merge_two_dicts(settings, spider.custom_settings)
+        flask_app_config['CRAWLER_PROCESS'].crawl(spider)
